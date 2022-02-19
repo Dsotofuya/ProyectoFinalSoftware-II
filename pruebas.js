@@ -11,4 +11,4 @@ let varNum2 = "123";
 
 console.log("Variable: " + varText);
 console.log(varNum == varNum2);
-const constante = "constante";
+const constante = "constante"; 
