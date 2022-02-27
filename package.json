@@ -1,0 +1,26 @@
+{
+  "name": "proyectofinalsoftware-ii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dsotofuya/ProyectoFinalSoftware-II.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dsotofuya/ProyectoFinalSoftware-II/issues"
+  },
+  "homepage": "https://github.com/Dsotofuya/ProyectoFinalSoftware-II#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
