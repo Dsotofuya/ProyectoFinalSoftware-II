@@ -1,10 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../database');
+const db = require("../database");
 
-router.get('/', (req, res) => {
-    //res.send("Acá irá la pgina de registro de usuario")
-    res.render('links/register')
+router.get("/", (req, res) => {
+  //res.send("Acá irá la pgina de registro de usuario")
+  res.render("links/register");
 });
 
-module.exports = router; 
+router.post("/", (req, res) => {
+    res.render("links/index");
+});
+
+module.exports = router;
