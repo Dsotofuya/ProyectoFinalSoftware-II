@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
 const db = require('../database');
 
-module.exports = router;
+router.get('/', (req, res) => {
+    //res.send("Acá irá la pgina de registro de usuario")
+    res.render('links/register')
+});
+
+module.exports = router; 
