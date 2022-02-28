@@ -7,8 +7,24 @@ router.get("/", (req, res) => {
   res.render("links/register");
 });
 
-router.post("/", (req, res) => {
-    res.render("links/index");
+router.post("/", async (req, res) => {
+    const { NOMBRE, CORREO, PAIS, FECHA_NACIMIENTO, CONTRASENA } = req.body;
+    const newUser = {
+      NOMBRE,
+      CORREO,
+      PAIS,
+      FECHA_NACIMIENTO,
+      CONTRASENA
+    };
+    console.log(newUser);
+   //db.query("SHOW TABLES", function (err, result, fields) {
+    await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+   });
+  // await db.query('INSERT INTO usuarios set ?', [newUser]);
+  // console.log(newUser);
+  res.render("links/index");
 });
 
 module.exports = router;
