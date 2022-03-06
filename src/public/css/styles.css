@@ -1,6 +1,37 @@
-div{
-border-top-width: 10px;
-border-right-width: 1em;
-border-bottom-width: thick;
-border-left-width: thin;
+.loginRegister{ 
+    display: flex; 
+    height: 100px;
+    background-color: #395B64;
+}
+
+
+.logo{
+    margin-left: 8%;
+    margin-top: 18px;
+}
+
+#search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputSearch{
+    width: 40%;
+    height: 38px;
+}
+
+#buttons{
+    display: flex;
+    align-items: right;
+    justify-content: right; 
+    margin-right: 3%;
+    width: 30%;
+}
+
+#lgn{
+    width: 70%;
+    height: 40px;
+    margin-top: 30px;
+    margin-right: 5%;
 }
