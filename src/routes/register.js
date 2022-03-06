@@ -22,8 +22,6 @@ router.post("/", async (req, res) => {
     if (err) throw err;
     console.log(result);
    });
-  // await db.query('INSERT INTO usuarios set ?', [newUser]);
-  // console.log(newUser);
   res.render("links/index");
 });
 

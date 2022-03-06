@@ -16,7 +16,7 @@
 
     {{! Awesome Font}}
     <script src="https://kit.fontawesome.com/4e37714a3c.js" crossorigin="anonymous"></script>
-    
+
     {{! Styles}}
     <link rel="stylesheet" href="/css/styles.css">
 
@@ -26,10 +26,15 @@
 </head>
 
 <body>
-
+    {{> loginRegister}}
     {{> navBar}}
-
+    {{> logo}}
+    {{> search}}
     {{{body}}}
 </body>
-
+<footer>
+    <p><a href="#">FAQ</a></p>
+    <p><a href="#">Contact</a></p>
+    <p><a href="#">About</a></p>
+</footer>
 </html>
