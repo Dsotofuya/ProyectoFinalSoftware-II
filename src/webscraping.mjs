@@ -44,12 +44,12 @@ async function getGameInfo(gameId) {
 }
 
 //console.log(getGame("Beast Master"));
-// getGame("Halo Infinite (Campaign)")
+//  console.log(getGame("Halo Infinite (Campaign)"));
 // console.log(await getGameInfo(getGame("Halo Infinite (Campaign)")));
 // const gameidA = getGame("Halo Infinite (Campaign)");
 // console.log(gameidA.resolve());
 // console.log(await getGameInfo(gameidA));
-//console.log(await getGameInfo(1708091));
+console.log(await getGameInfo(1708091));
 
 
 // console.log(getGame("Halo Infinite (Campaign)"));
