@@ -30,4 +30,9 @@ async function getGameInfo(gameId) {
   };
 }
 
+exports.getGame = getGame(gameName);
+exports.getGameInfo = getGameInfo(gameId);
+
+module.exports = getGameInfo(gameId);
+
 console.log(await getGameInfo(await getGame("Halo Infinite (Campaign)")));
