@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node src/",
     "dev": "nodemon src/"
   },
   "repository": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Dsotofuya/ProyectoFinalSoftware-II#readme",
   "dependencies": {
+    "axios": "^0.26.0",
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.10",
     "connect-flash": "^0.1.1",
@@ -32,6 +34,5 @@
     "passport-local": "^1.0.0",
     "timeago.js": "^4.0.2"
   },
-  "devDependencies": {},
   "description": ""
 }

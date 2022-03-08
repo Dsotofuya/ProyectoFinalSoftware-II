@@ -1,5 +1,6 @@
 //Importación de modulo de webscraping
 import fetch from "node-fetch";
+const scraping = {};
 
 // Se saca los datos en formato JSON del api de steam
 async function getGame(gameName) {
@@ -15,7 +16,7 @@ async function getGame(gameName) {
 }
 
 //Funcion asincrona para objetener los datos especificos de un juego apartir de su id, además de retornar un objeto con los valores necesitados
-async function getGameInfo(gameId) {
+ async function getGameInfo (gameId) {
   //URL de la segunda api para obtener datos detallados de un juego especifico
   const gameInfo = "https://store.steampowered.com/api/appdetails?appids=";
   let gameResponse = await fetch(gameInfo + gameId);
@@ -29,10 +30,5 @@ async function getGameInfo(gameId) {
     final_formatted: game[gameId].data.price_overview.final_formatted,
   };
 }
-
-exports.getGame = getGame(gameName);
-exports.getGameInfo = getGameInfo(gameId);
-
-module.exports = getGameInfo(gameId);
 
 console.log(await getGameInfo(await getGame("Halo Infinite (Campaign)")));
