@@ -5,6 +5,6 @@ const ws = require("./webScrapingSteam.js");
 async function f1() {
   var x = await ws.getGame("Halo Infinite (Campaign)");
   var y = await ws.getGameInfo(x);
-  console.log(y); // 10
+  console.log(y);
 }
 f1();
