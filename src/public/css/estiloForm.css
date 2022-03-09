@@ -1,0 +1,65 @@
+*{
+    padding: 0;
+    margin: 0;
+    background-color: #33658A;
+    font-family: sans-serif;
+}
+
+.controles{
+    width: 90%;
+    background: white;
+    border-color: #55DDE0;
+    border-radius: 4px;
+    padding: 10px;
+    color: #33658A;
+    align-items: center;
+}
+
+.section{
+    text-align: left;
+    width: 90%;
+    background: white;
+    margin: auto;
+    border-radius: 4px;
+}
+
+.form{
+    background-color: white;
+    width: 30%;
+    padding: 30px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.form label{
+    background: white;
+    color: black;
+}
+
+.form p{
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+    background-color: white;
+}
+
+.form .boton{
+width: 90%;
+border-radius: 8px;
+border: none;
+padding: 17px;
+margin: 16px;
+color: white;
+background-color: #F26419;
+}
+
+.form textarea{
+    background-color: white;
+}
+
+.form h1{
+    background-color: white;
+    color: #2F4858;
+    text-align: center;
+}
