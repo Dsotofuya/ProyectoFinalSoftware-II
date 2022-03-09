@@ -4,6 +4,10 @@
     background-color: #395B64;
 }
 
+.registerBg{
+    display: flex;
+    background-color: #33658A;
+}
 
 .logo{
     margin-left: 8%;
