@@ -36,7 +36,6 @@ server.use(express.urlencoded({ extended: false }));
 //Este midleware sirve para enviar y consumir jsons
 server.use(express.json());
 
-
 //Global Variables
 server.use((req, res, next) => {
   next();

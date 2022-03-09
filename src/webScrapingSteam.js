@@ -1,7 +1,7 @@
 const axios = require("axios").default;
 
 
-  //Funcion asincrona para obtener los datos de un juego apartir de su nombre en concreto
+//Funcion asincrona para obtener los datos de un juego apartir de su nombre en concreto
 async function getGame(gameName) {
   try {
     const response = await axios.get(

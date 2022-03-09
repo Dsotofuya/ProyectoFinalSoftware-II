@@ -7,14 +7,14 @@ async function getGame(gameName) {
       "https://www.eneba.com/latam/store?text=" + gameName
     );
     const $ = cheerio.load(response.data);
-    var gameDetails = {},
-      gameList = {};
+     var gameDetails = {}
+      // gameList = {};
     $("div .uy1qit").each((i, element) => {
       gameDetails.name = $(element).find("div .lirayz").text();
       gameDetails.price = $(element).find("span .L5ErLT").text();
-      gameList.gameDetails = gameDetails;
+      // gameList.gameDetails = gameDetails;
+      console.log(gameDetails);
     });
-    console.log(gameList);
   } catch (error) {
     console.error(error);
   }
