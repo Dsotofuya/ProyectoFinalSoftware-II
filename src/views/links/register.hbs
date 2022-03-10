@@ -1,25 +1,42 @@
-acá ira la pagina de registro
-<div class="container p-4">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="mx-auto">Registro</h1>
-                    <form action="/register" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="NOMBRE" placeholder="Usuario" autofocus>
-                            <input type="text" class="form-control" name="CORREO" placeholder="Correo">
-                            <input type="text" class="form-control" name="PAIS" placeholder="Pais">
-                            <input type="text" class="form-control" name="CONTRASENA" placeholder="Constraseña">
-                            <input type="text" class="form-control" name="password-confirmation"
-                                placeholder="Confirmar constraseña">
-                            <!-- datepicker -->
-                            <label for="birthDate">Fecha de nacimiento</label>
-                            <input id="birthDate" class="form-control" type="date" name="FECHA_NACIMIENTO"/>
-                            <span id="birthDateSelected"></span>
-                            <button class="btn btn-success btn-block">Registrarse</button>
-                        </div>
-                    </form>
+<div class="registerBg">
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="card" style="border-color:  #395B64;">
+                    <div class="card-body">
+                        <h1 class="mx-auto" style="color: #2F4858;">Formulario de registro</h1>
+                        <form action="/register" method="POST">
+                            <div class="form-group">
+                                <label class="label-xl">Nombre</label>
+                                <input type="text" class="form-control" name="NOMBRE" placeholder="Ingresa tu Nombre"
+                                    required autofocus>
+                                <br>
+                                <label class="label-xl">Correo</label>
+                                <input type="text" class="form-control" name="CORREO" placeholder="Ingresa tu Correo"
+                                    required>
+                                <br>
+                                <label class="label-xl">Pais</label>
+                                <input type="text" class="form-control" name="PAIS" placeholder="Ingresa tu Pais">
+                                <br>
+                                <label class="label-xl">Contraseña </label>
+                                <input type="password" class="form-control" name="CONTRASENA"
+                                    pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" placeholder="Ingresa tu Constraseña (unicamente con alfanumericos)"
+                                    required>
+                                <br>
+                                <label class="label-xl">Confirmacion</label>
+                                <input type="password" class="form-control" name="password-confirmation"
+                                    placeholder="Reingresa tu constraseña" required>
+                                <br>
+                                <label for="birthDate">Fecha de nacimiento</label>
+                                <input id="birthDate" class="form-control" type="date" name="FECHA_NACIMIENTO" />
+                                <span id="birthDateSelected"></span>
+                                <br>
+                                <button class="btn btn-success btn-block"
+                                    style="background-color: #F26419; width: 100%;">Registrarse</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
