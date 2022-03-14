@@ -8,3 +8,5 @@ async function f1() {
   console.log(y);
 }
 f1();
+
+// Epic store main url: https://www.epicgames.com/store/es-ES/p/borderlands-3

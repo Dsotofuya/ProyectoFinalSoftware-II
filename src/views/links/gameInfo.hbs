@@ -1,18 +1,16 @@
+{{#each gameInfo}}
 <div class="container-lg">
     <div class="row" style="min-height: 50vh;">
         <div class="col col-sm-8 align-self-center">
             <div class="row align-items-center">
-                <h1 class="text-start"> acá va el nombre de un juego </h1>
-                <p class="text-center fw-light">rem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur aperiam
-                    dolor
-                    molestiae nostrum, nam nulla repudiandae officiis, et assumenda aspernatur voluptas obcaecati earum
-                    nemo
-                    eligendi ex inventore, officia quas similique.</p>
+                <h1 class="text-start"> {{NOMBRE_VIDEOJUEGO}} </h1>
+                <h2 class="text-start">Desarrolladora: {{DESARROLLADORA}} </h2>
+                <p class="text-center fw-light">Descripción: {{DESCRIPCION}}</p>
             </div>
         </div>
 
         <div class="col col-sm-4">
-            <img src="\images\kinguingLogo.png" class="img-fluid" alt="aca va la imagen">
+            <img src="{{URL_IMAGEN}}" class="img-fluid" alt="aca va la imagen">
         </div>
     </div>
 
@@ -20,10 +18,10 @@
 
         <div class="col col-lg-3">
             <div class="card" style="width: 12rem; background-color: #2F4858;">
-                <a href="https://store.steampowered.com/">
+                <a href="{{URL_STEAM}}">
                     <img src="/images/steamLogo.png" class="card-img-top img-fluid" alt="steamLogo">
                     <div class="card-body">
-                        <p class="card-text">precio en steam: </p>
+                        <p class="card-text">precio en steam: {{PRECIO_STEAM}}</p>
                     </div>
                 </a>
             </div>
@@ -31,10 +29,10 @@
 
         <div class="col col-lg-3">
             <div class="card" style="width: 12rem; background-color: #2F4858;">
-                <a href="https://www.eneba.com/">
+                <a href="{{URL_ENEBA}}">
                     <img src="/images/enebaLogo.webp" class="card-img-top img-fluid" alt="enebaLogo">
                     <div class="card-body">
-                        <p class="card-text">precio en eneba: </p>
+                        <p class="card-text">precio en eneba: {{PRECIO_ENEBA}}</p>
                     </div>
                 </a>
             </div>
@@ -42,13 +40,14 @@
 
         <div class="col col-lg-3">
             <div class="card" style="width: 12rem; background-color: #2F4858;">
-                <a href="https://www.epicgames.com/">
+                <a href="{{URL_EPIC}}">
                     <img src="/images/epicLogo.png" class="card-img-top img-fluid" alt="epicLogo">
                     <div class="card-body">
-                        <p class="card-text">precio en Epicgames: </p>
+                        <p class="card-text">precio en Epicgames: {{PRECIO_EPIC}}</p>
                     </div>
                 </a>
             </div>
         </div>
     </div>
 </div>
+{{/each }}

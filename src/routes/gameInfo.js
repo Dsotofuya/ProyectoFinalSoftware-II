@@ -1,12 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../database');
+const db = require("../database");
 
-router.get("/", (req, res) => {
-  //res.send("Acá irá la pgina de registro de usuario")
-  res.render("links/gameInfo");
+router.get("/:gameId", async (req, res) => {
+  const gameId = req.params.gameId;
+  console.log(`The gameId: ${gameId} has been requested`);
+  await db.query(
+    "SELECT * FROM JUEGOS WHERE ID_VIDEOJUEGO = ?",
+    [gameId],
+    function (err, gameInfo, fields) {
+      if (err) throw err;
+      res.render("links/gameInfo", { gameInfo });
+    }
+  );
 });
-
-
-
 module.exports = router;
