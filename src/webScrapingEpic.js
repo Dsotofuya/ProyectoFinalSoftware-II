@@ -7,20 +7,32 @@ async function getGame(gameName) {
       "https://epicgames-db.info/en-US/p/" + gameName
     );
     const $ = cheerio.load(response.data);
-    
-    const a = $("tbody  > tr:nth-child(20) ").text();
-    console.log( a);
-    // console.log($("td [class=p-1]").text());
-    //   $("div .border-b").each((i, element) => {
-    //      if ($("td .p-1").text() == "United States of America") {
-    //         console.log('Precio actual: ',$("td .p-1"), ':')
-    //      }
-    //   }); 
-} catch (error) {
-    console.error(error, " Este juego no existe en esta pagina");
+    for (let i = 1; i < 27; i++) {
+      if (
+        $(`tbody  > tr:nth-child(${i})`)
+          .text()
+          .includes("United States of America")
+      ) {
+        return converScrapToObjetct($(`tbody  > tr:nth-child(${i})`).text());
+      }
+    }
+  } catch (error) {
+    console.error(error, "Este juego no existe en esta pagina");
   }
 }
 
+async function converScrapToObjetct(text) {
+  var y = text
+    .replace(/\r?\n|\r/g, " ")
+    .split(" ")
+    .join("");
+  var x = {
+    price: parseFloat(y.substring(22, 27)),
+    lowerPrice: parseFloat(y.substring(34, 39)),
+  };
+  console.log(x);
+}
 
+getGame("borderlands-3")
 
-getGame("borderlands-3");
+getGame("darkest-dungeon")
