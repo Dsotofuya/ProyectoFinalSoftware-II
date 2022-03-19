@@ -1,12 +1,73 @@
-const ws = require("./webScrapingSteam.js");
+const wsSTeam = require("./webScrapingSteam.js");
+const wsEpic = require("./webScrapingEpic.js");
+const wsEneba = require("./webScrapingEneba.js");
+const db = require("./database");
 
 
-//Prueba webscraping steam
-async function f1() {
-  var x = await ws.getGame("Halo Infinite (Campaign)");
-  var y = await ws.getGameInfo(x);
-  console.log(y);
+//Falta exportar la función scrap game para que sea usada por el modulo de la ruta encargada, para no usar la base de datos en este modulo
+//Prueba webscraping
+async function scrapGame(gameName) {
+  //  const steamResponse = await wsSTeam.getGameInfo(
+  //     await wsSTeam.getGame(processString(gameName))
+  //  );
+  const steamResponse = await wsSTeam.getGameInfo(397540);
+  const epicResponse = await wsEpic.getGame(splitSpaces(gameName));
+  const enebaResponse = await wsEneba.getGame(gameName);
+  console.log("Webscraping steam: ", steamResponse);
+  console.log("Webscraping epic: ", epicResponse);
+  console.log("Webscraping eneba: ", enebaResponse);
+
+  const game = {
+    NOMBRE_VIDEOJUEGO: steamResponse.name,
+    URL_IMAGEN: steamResponse.header_image,
+    DESCRIPCION: steamResponse.short_description,
+    DESARROLLADORA: steamResponse.developers[0],
+    URL_STEAM:
+      "https://store.steampowered.com/app/" +
+      steamResponse.id +
+      "/" +
+      splitSpacesUnder(gameName) +
+      "/",
+    PRECIO_STEAM: steamResponse.final_formatted,
+    URL_EPIC:
+      "https://www.epicgames.com/store/es-ES/p/" + splitSpaces(gameName),
+    PRECIO_EPIC: epicResponse.price,
+    URL_ENEBA: enebaResponse.url,
+    PRECIO_ENEBA: enebaResponse.price,
+    POPULARIDAD: 5,
+  };
+  await db.query(
+    "INSERT INTO JUEGOS set ?",
+    [game],
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+    }
+  );
 }
-f1();
 
-// Epic store main url: https://www.epicgames.com/store/es-ES/p/borderlands-3
+function splitSpaces(name) {
+  return name.replace(" ", "-");
+}
+
+function splitSpacesUnder(name) {
+  return name.replace(" ", "_");
+}
+
+function separeteString(str) {
+  return str.split(" ");
+}
+
+function toUpperCaseFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function processString(gameName) {
+  const arrayWords = separeteString(gameName);
+  for (let index = 0; index < arrayWords.length; index++) {
+    arrayWords[index] = toUpperCaseFirstLetter(arrayWords[index]);
+  }
+  return arrayWords.join(" ");
+}
+scrapGame("borderlands 3");
+// barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos

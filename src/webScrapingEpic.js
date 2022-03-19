@@ -26,13 +26,10 @@ async function converScrapToObjetct(text) {
     .replace(/\r?\n|\r/g, " ")
     .split(" ")
     .join("");
-  var x = {
+  return {
     price: parseFloat(y.substring(22, 27)),
     lowerPrice: parseFloat(y.substring(34, 39)),
   };
-  console.log(x);
 }
 
-getGame("borderlands-3")
-
-getGame("darkest-dungeon")
+module.exports.getGame = getGame;
