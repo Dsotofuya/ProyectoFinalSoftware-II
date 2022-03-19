@@ -9,9 +9,18 @@
     background-color: #33658A;
 }
 
+.gameInfoBg{
+    display: flex;
+}
+
 .logo{
     margin-left: 8%;
     margin-top: 18px;
+}
+
+.href{
+
+    color: white;
 }
 
 #search{
@@ -42,4 +51,12 @@
 
 a:hover{
     background-color: #F26419;
+    color: white;
+    text-decoration-line: none;
 }
+
+a{
+    color: white;
+    text-decoration-line: none;
+}
+
