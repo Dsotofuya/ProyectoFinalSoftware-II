@@ -3,10 +3,10 @@ const wsEpic = require("./webScrapingEpic.js");
 const wsEneba = require("./webScrapingEneba.js");
 const db = require("./database");
 
+
+//Falta exportar la función scrap game para que sea usada por el modulo de la ruta encargada, para no usar la base de datos en este modulo
 //Prueba webscraping
 async function scrapGame(gameName) {
-  console.log(await wsSTeam.getGame("a"));
-
   //  const steamResponse = await wsSTeam.getGameInfo(
   //     await wsSTeam.getGame(processString(gameName))
   //  );
@@ -70,10 +70,4 @@ function processString(gameName) {
   return arrayWords.join(" ");
 }
 scrapGame("borderlands 3");
-
-// console.log(splitSpaces("borderlands 3"));
-// getGame("borderlands-3")
-// getGame("darkest-dungeon")
-// Epic store main url: https://www.epicgames.com/store/es-ES/p/borderlands-3
-
 // barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos
