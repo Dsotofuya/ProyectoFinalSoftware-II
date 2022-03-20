@@ -14,6 +14,7 @@ async function scrapGame(gameName) {
   console.log("Webscraping steam: ", steamResponse);
   console.log("Webscraping epic: ", epicResponse);
   console.log("Webscraping eneba: ", enebaResponse);
+
   return {
     NOMBRE_VIDEOJUEGO: steamResponse.name,
     URL_IMAGEN: steamResponse.header_image,
@@ -27,11 +28,12 @@ async function scrapGame(gameName) {
       "/",
     PRECIO_STEAM: steamResponse.final_formatted,
     URL_EPIC:
-      "https://www.epicgames.com/store/es-ES/p/" + (splitSpaces(gameName).toLowerCase()),
+      "https://www.epicgames.com/store/es-ES/p/" +
+      splitSpaces(gameName).toLowerCase(),
     PRECIO_EPIC: epicResponse.price,
     URL_ENEBA: enebaResponse.url,
     PRECIO_ENEBA: enebaResponse.price,
-    POPULARIDAD: 5,
+    POPULARIDAD: 5
   };
 }
 
@@ -44,6 +46,15 @@ async function insertGame(game) {
       console.log(result);
     }
   );
+
+  // await db.query(
+  //   "INSERT INTO GENEROS set ?",
+  //   [steamResponse.GENEROS],
+  //   function (err, result, fields) {
+  //     if (err) throw err;
+  //     console.log(result);
+  //   }
+  // );
 }
 
 function splitSpaces(name) {
@@ -70,15 +81,14 @@ function processString(gameName) {
   return arrayWords.join(" ");
 }
 
-module.exports.scrapGame = scrapGame;
-module.exports.insertGame = insertGame;
+async function f1() {
+  const a = await scrapGame("Tomb Raider");
+  console.log(a);
+  await insertGame(a);
+}
+f1();
 
-// // scrapGame("borderlands 3");
-// async function f1() {
-//   const a = await scrapGame("Darkest dungeon");
-//   console.log(a);
-//   await insertGame(a);
-// }
-// f1();
+// module.exports.scrapGame = scrapGame;
+// module.exports.insertGame = insertGame;
 
 // barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos
