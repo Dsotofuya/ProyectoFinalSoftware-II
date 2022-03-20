@@ -13,14 +13,11 @@
     display: flex;
 }
 
-.logo{
-    margin-left: 8%;
-    margin-top: 18px;
+.mainBg{
+    display: flex;
 }
 
-.href{
-
-    color: white;
+.logo{
 }
 
 #search{
@@ -49,9 +46,16 @@
     margin-right: 5%;
 }
 
+body{
+
+}
+
+img{
+    margin: 0%;
+}
+
 a:hover{
     background-color: #F26419;
-    color: white;
     text-decoration-line: none;
 }
 
