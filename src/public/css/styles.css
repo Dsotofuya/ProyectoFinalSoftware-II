@@ -46,9 +46,6 @@
     margin-right: 5%;
 }
 
-body{
-
-}
 
 img{
     margin: 0%;
@@ -57,6 +54,7 @@ img{
 a:hover{
     background-color: #F26419;
     text-decoration-line: none;
+    color: white;
 }
 
 a{
