@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     if (err) throw err;
     console.log(result);
    });
-  res.render("links/index");
+  res.redirect("/mainPage");
 });
 
 module.exports = router;

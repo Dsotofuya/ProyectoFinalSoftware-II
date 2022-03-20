@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {{# each gameInfo}}
+    <div>
+    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
+    <a href="/gameInfo/{{ID_VIDEOJUEGO}}">
+    <img src="{{URL_IMAGEN}}" class="card-img-top img-fluid" alt="steamLogo">
+    </div>
+    {{/each }}
 </head>
 <body>
     <h1>holi</h1>
