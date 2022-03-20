@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-    <div class="row">
-    {{#each gameInfo}}
-    <div class="card col" style="width: 18rem;">
-    <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="background-color: gray;">
-    <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
-    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
-    </a>
-    </div>
-    {{/each }}    
+<body class="align-self-stretch">
+    <div id="carouselExampleIndicators" class="carousel slide align-self-stretch" data-ride="carousel" style="width: 99%;">
+
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+
+        <div class="row">
+            {{#each gameInfo}}
+            <div class="card col" style="width: rem5;  border: none;">
+                <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="background-color: #2F4858; color: white;">
+                    <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
+                    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
+                </a>
+            </div>
+            {{/each }}
+        </div>
     </div>
 </body>
+
 </html>
