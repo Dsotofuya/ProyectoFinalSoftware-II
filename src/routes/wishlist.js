@@ -2,8 +2,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database');
 
-router.get("/", (req, res) => {
-    res.render("links/wishList");
-  });
+router.get("/", async (req, res) => {
+  await db.query(
+    "SELECT ID_VIDEOJUEGO, NOMBRE_VIDEOJUEGO, URL_IMAGEN FROM JUEGOS",
+    function (err, gameInfo, fields) {
+      if (err) throw err;
+      res.render("links/wishList",  { gameInfo });
+    }
+  );
+});
 
 module.exports = router;
