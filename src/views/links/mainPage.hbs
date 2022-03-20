@@ -1,6 +1,7 @@
-
 <body class="align-self-stretch">
-    <div id="carouselExampleIndicators" class="carousel slide align-self-stretch" data-ride="carousel" style="width: 99%;">
+
+    <div id="carouselExampleIndicators" class="carousel slide align-self-stretch" data-ride="carousel"
+        style="width: 99%;">
 
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -8,16 +9,30 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
 
-        <div class="row">
+
+
+        <div class="row carousel-inner">
             {{#each gameInfo}}
-            <div class="card col" style="width: rem5;  border: none;">
-                <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="background-color: #2F4858; color: white;">
-                    <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
-                    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
-                </a>
+            <div class="col">
+                <div class="card" style="width: 200wv; background-color: #2F4858;">
+                    <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white;">
+                        <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
+                        <p class="card-text" id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
+                    </a>
+                </div>
             </div>
             {{/each }}
         </div>
+
+        <b class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="width: 2wv;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </b>
+        <b class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </b>
+
     </div>
 </body>
 
