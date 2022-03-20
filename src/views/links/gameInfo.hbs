@@ -1,13 +1,20 @@
 {{#each gameInfo}}
-<div class="gameInfoBg" >
+<div class="gameInfoBg">
 
     <div class="container-lg" style="min-width: 100%; background-color: #2F4858; color: white">
         <div class="row" style="min-height: 47vh;">
             <div class="col col-sm-8 align-self-center">
                 <div class="row align-items-center">
-                    <h1 class="text-start"> {{NOMBRE_VIDEOJUEGO}} </h1>
-                    <h3 class="text-start">Desarrolladora: {{DESARROLLADORA}} </h3>
-                    <p class="text-center fw-light">Descripción: {{DESCRIPCION}}</p>
+                    <h1 class="text-center" style="margin-bottom: 1%;"> {{NOMBRE_VIDEOJUEGO}} </h1>
+                    <h3 class="text-center" style="margin-bottom: 3%;">Desarrolladora: {{DESARROLLADORA}} </h3>
+                    <br>
+                    <p class="text-center fw-light" style="font-size: larger;">Descripción: {{DESCRIPCION}}</p>
+                </div>
+                <div class="row justify-content-center" style="margin: 5vh; width: 90%; height: 100%;">
+                    {{!-- aca va el boton --}}
+                    <button class="btn btn-success btn-block"
+                        style="background-color: #F26419; width: 100%; font-size: x-large; height: 90hv;">agregar a lista de
+                        deseos</button>
                 </div>
             </div>
 
@@ -15,8 +22,7 @@
                 <img src="{{URL_IMAGEN}}" class="img-fluid" alt="aca va la imagen">
             </div>
         </div>
-{{!-- #395B64 --}}
-        <div class="row justify-content-center" style="background-color: #395B64; margin-top: 5vh;" >
+        <div class="row justify-content-center" style="background-color: #395B64; margin-top: 5vh;">
 
             <div class="col col-lg-3" style="margin-top: 5vh; margin-bottom: 5vh;">
                 <div class="card" style="width: 12rem; background-color: #2F4858;">
