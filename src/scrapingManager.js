@@ -69,12 +69,16 @@ function processString(gameName) {
   }
   return arrayWords.join(" ");
 }
-// scrapGame("borderlands 3");
-async function f1() {
-  const a = await scrapGame("Darkest dungeon");
-  console.log(a);
-  await insertGame(a);
-}
 
-f1();
+module.exports.scrapGame = scrapGame;
+module.exports.insertGame = insertGame;
+
+// // scrapGame("borderlands 3");
+// async function f1() {
+//   const a = await scrapGame("Darkest dungeon");
+//   console.log(a);
+//   await insertGame(a);
+// }
+// f1();
+
 // barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos
