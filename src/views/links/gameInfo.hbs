@@ -26,7 +26,7 @@
 
             <div class="col col-lg-3" style="margin-top: 5vh; margin-bottom: 5vh;">
                 <div class="card" style="width: 12rem; background-color: #2F4858;">
-                    <a href="{{URL_STEAM}}">
+                    <a href="{{URL_STEAM}}" target="_blank">
                         <img src="/images/steamLogo.png" class="card-img-top img-fluid" alt="steamLogo">
                         <div class="card-body">
                             <p class="card-text">precio en steam: {{PRECIO_STEAM}}</p>
@@ -37,7 +37,7 @@
 
             <div class="col col-lg-3" style="margin-top: 5vh; margin-bottom: 5vh;">
                 <div class="card" style="width: 12rem; background-color: #2F4858;">
-                    <a href="{{URL_ENEBA}}">
+                    <a href="{{URL_ENEBA}}" target="_blank">
                         <img src="/images/enebaLogo.webp" class="card-img-top img-fluid" alt="enebaLogo">
                         <div class="card-body">
                             <p class="card-text">precio en eneba: {{PRECIO_ENEBA}}</p>
@@ -48,7 +48,7 @@
 
             <div class="col col-lg-3" style="margin-top: 5vh; margin-bottom: 5vh;">
                 <div class="card" style="width: 12rem; background-color: #2F4858;">
-                    <a href="{{URL_EPIC}}">
+                    <a href="{{URL_EPIC}}" target="_blank">
                         <img src="/images/epicLogo.png" class="card-img-top img-fluid" alt="epicLogo">
                         <div class="card-body">
                             <p class="card-text">precio en Epicgames: {{PRECIO_EPIC}}</p>
@@ -56,6 +56,7 @@
                     </a>
                 </div>
             </div>
+            <div>El descuento historico mas bajo para este juego fue hace {{timeago FECHA_DESCUENTO}} , en la tienda de {{TIENDA}}, con un precio de {{PRECIO}}</div>
         </div>
     </div>
 </div>
