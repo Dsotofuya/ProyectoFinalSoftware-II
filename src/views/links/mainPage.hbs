@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {{# each gameInfo}}
-    <div>
+    <div class="card" style="width: 18rem;" >
     <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
-    <a href="/gameInfo/{{ID_VIDEOJUEGO}}">
-    <img src="{{URL_IMAGEN}}" class="card-img-top img-fluid" alt="steamLogo">
+    <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="background-color: gray;">
+    <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
     </div>
     {{/each }}
 </head>
