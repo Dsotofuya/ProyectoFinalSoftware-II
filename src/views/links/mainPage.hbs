@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+</head>
+<body>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <div class="row">
     {{#each gameInfo}}
-    <div>
-    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
+    <div class="card col" style="width: 18rem;">
     <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="background-color: gray;">
     <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
+    <div id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</div>
+    </a>
     </div>
-    {{/each }}
-</head>
-<body>
-    <h1>holi</h1>
-    
+    {{/each }}    
+    </div>
 </body>
 </html>
