@@ -10,7 +10,7 @@ async function getGame(gameName) {
     const $ = cheerio.load(response.data);
     gameDetails.name = $("div .uy1qit").find("div .lirayz").first().text();
     gameDetails.url = ("https://www.eneba.com" + $("div .uy1qit").find("div .oSVLlh").attr("href"));
-    gameDetails.price = parseFloat(
+    let tempPrice =  parseFloat(
       $("div .uy1qit")
         .find("span .L5ErLT")
         .first()
@@ -18,7 +18,12 @@ async function getGame(gameName) {
         .substring(0, 5)
         .replace(",", ".")
     );
-    return gameDetails;
+    if (isNaN(tempPrice)) {
+      gameDetails.price = 0;
+    } else{
+      gameDetails.price = tempPrice
+    }
+     return gameDetails;
   } catch (error) {
     console.error(error);
   }

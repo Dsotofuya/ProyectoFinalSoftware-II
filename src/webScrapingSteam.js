@@ -5,11 +5,12 @@ const axios = require("axios").default;
 async function getGame(gameName) {
   try {
     const response = await axios.get(
-      "https://api.steampowered.com/ISteamApps/GetAppList/v1/"  
-      // "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
+      // "https://api.steampowered.com/ISteamApps/GetAppList/v1/"  
+       "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
     );
     const appList = response.data.applist.apps;
-    const { appid } = appList.find((app) => app.name === gameName);
+    // const { appid } = appList.find((app) => app.name === gameName);
+    const { appid } = appList.find((app) => (app.name).includes(gameName));
     return appid;
   } catch (error) {
     console.error(error);

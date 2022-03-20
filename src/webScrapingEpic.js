@@ -18,6 +18,10 @@ async function getGame(gameName) {
     }
   } catch (error) {
     console.error(error, "Este juego no existe en esta pagina");
+    return {
+      price: 0,
+      lowerPrice: 0
+    }
   }
 }
 
@@ -28,7 +32,7 @@ async function converScrapToObjetct(text) {
     .join("");
   return {
     price: parseFloat(y.substring(22, 27)),
-    lowerPrice: parseFloat(y.substring(34, 39)),
+    lowerPrice: parseFloat(y.substring(34, 39))
   };
 }
 

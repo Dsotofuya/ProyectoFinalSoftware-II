@@ -3,21 +3,18 @@ const wsEpic = require("./webScrapingEpic.js");
 const wsEneba = require("./webScrapingEneba.js");
 const db = require("./database");
 
-
 //Falta exportar la función scrap game para que sea usada por el modulo de la ruta encargada, para no usar la base de datos en este modulo
 //Prueba webscraping
 async function scrapGame(gameName) {
-  //  const steamResponse = await wsSTeam.getGameInfo(
-  //     await wsSTeam.getGame(processString(gameName))
-  //  );
-  const steamResponse = await wsSTeam.getGameInfo(397540);
+  const steamResponse = await wsSTeam.getGameInfo(
+    await wsSTeam.getGame(processString(gameName))
+  );
   const epicResponse = await wsEpic.getGame(splitSpaces(gameName));
   const enebaResponse = await wsEneba.getGame(gameName);
   console.log("Webscraping steam: ", steamResponse);
   console.log("Webscraping epic: ", epicResponse);
   console.log("Webscraping eneba: ", enebaResponse);
-
-  const game = {
+  return {
     NOMBRE_VIDEOJUEGO: steamResponse.name,
     URL_IMAGEN: steamResponse.header_image,
     DESCRIPCION: steamResponse.short_description,
@@ -30,12 +27,15 @@ async function scrapGame(gameName) {
       "/",
     PRECIO_STEAM: steamResponse.final_formatted,
     URL_EPIC:
-      "https://www.epicgames.com/store/es-ES/p/" + splitSpaces(gameName),
+      "https://www.epicgames.com/store/es-ES/p/" + (splitSpaces(gameName).toLowerCase()),
     PRECIO_EPIC: epicResponse.price,
     URL_ENEBA: enebaResponse.url,
     PRECIO_ENEBA: enebaResponse.price,
     POPULARIDAD: 5,
   };
+}
+
+async function insertGame(game) {
   await db.query(
     "INSERT INTO JUEGOS set ?",
     [game],
@@ -69,5 +69,12 @@ function processString(gameName) {
   }
   return arrayWords.join(" ");
 }
-scrapGame("borderlands 3");
+// scrapGame("borderlands 3");
+async function f1() {
+  const a = await scrapGame("Darkest dungeon");
+  console.log(a);
+  await insertGame(a);
+}
+
+f1();
 // barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos
