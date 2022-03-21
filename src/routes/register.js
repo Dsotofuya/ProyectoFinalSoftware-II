@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
   const { NOMBRE, CORREO, PAIS, FECHA_NACIMIENTO, CONTRASENA, CONFIRMATION } =
     req.body;
 
-  await db.query("SELECT CORREO FROM USUARIOS", function (err, mails, fields) {
+  await db.query("SELECT CORREO FROM USUARIOS", async function (err, mails, fields) {
     if (err) throw err;
     let error2 = { error: "mostrar" };
     if (validate(mails, CORREO)) {
@@ -33,7 +33,6 @@ router.post("/", async (req, res) => {
         };
         console.log(newUser);
         await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
-    
           if (err) throw err;
           console.log(result);
         });
