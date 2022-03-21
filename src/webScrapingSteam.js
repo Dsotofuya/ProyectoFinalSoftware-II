@@ -1,16 +1,15 @@
 const axios = require("axios").default;
 
-
 //Funcion asincrona para obtener los datos de un juego apartir de su nombre en concreto
 async function getGame(gameName) {
   try {
     const response = await axios.get(
-      // "https://api.steampowered.com/ISteamApps/GetAppList/v1/"  
-       "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
+      // "https://api.steampowered.com/ISteamApps/GetAppList/v1/"
+      "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
     );
     const appList = response.data.applist.apps;
-    // const { appid } = appList.find((app) => app.name === gameName);
-    const { appid } = appList.find((app) => (app.name).includes(gameName));
+    const { appid } = appList.find((app) => app.name === gameName);
+    // const { appid } = appList.find((app) => (app.name).includes(gameName));
     return appid;
   } catch (error) {
     console.error(error);
@@ -31,13 +30,15 @@ async function getGameInfo(gameId) {
       genres: game[gameId].data.genres,
       header_image: game[gameId].data.header_image,
       developers: game[gameId].data.developers,
-      initial_formatted: parseFloat((game[gameId].data.price_overview.initial_formatted).substring(1, 5)),
-      final_formatted: parseFloat((game[gameId].data.price_overview.final_formatted).substring(1, 5))
+      // initial_formatted: parseFloat((game[gameId].data.price_overview.initial_formatted).substring(1, 5)),
+      final_formatted: parseFloat(
+        game[gameId].data.price_overview.final_formatted.substring(1, 5)
+      ),
     };
   } catch (err) {
     console.error(err);
   }
 }
 
-module.exports.getGame = getGame
-module.exports.getGameInfo = getGameInfo
+module.exports.getGame = getGame;
+module.exports.getGameInfo = getGameInfo;
