@@ -48,6 +48,7 @@ server.use("/register", module.require("./routes/register"));
 server.use("/gameInfo", module.require("./routes/gameInfo"));
 server.use("/wishList", module.require("./routes/wishlist"));
 server.use("/mainPage", module.require("./routes/mainPage"));
+server.use("/login", module.require("./routes/login"));
 
 //Public
 server.use(express.static(path.join(__dirname, "public")));

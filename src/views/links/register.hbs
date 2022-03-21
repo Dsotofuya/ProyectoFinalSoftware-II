@@ -21,13 +21,20 @@
                                 <br>
                                 <label class="label-xl">Contraseña </label>
                                 <input type="password" class="form-control" name="CONTRASENA"
-                                    pattern="[A-Za-z0-9]*[0-9][A-Za-z0-9]*" placeholder="Ingresa tu Constraseña (unicamente con alfanumericos)"
-                                    required>
+                                    pattern="[A-Za-z0-9]*[0-9][A-Za-z0-9]*"
+                                    placeholder="Ingresa tu Constraseña (unicamente con alfanumericos)" required>
                                 <br>
                                 <label class="label-xl">Confirmacion</label>
-                                <input type="password" class="form-control" name="password-confirmation"
+                                <input type="password" class="form-control" name="CONFIRMATION"
                                     placeholder="Reingresa tu constraseña" required>
                                 <br>
+                                <!-- Mensajes de Verificación -->
+                                <div id="error" class="alert alert-danger ocultar" role="alert">
+                                    Las Contraseñas no coinciden, vuelve a intentar !
+                                </div>
+                                <div id="ok" class="alert alert-success ocultar" role="alert">
+                                    Las Contraseñas coinciden ! (Procesando formulario ... )
+                                </div>
                                 <label for="birthDate">Fecha de nacimiento</label>
                                 <input id="birthDate" class="form-control" type="date" name="FECHA_NACIMIENTO" />
                                 <span id="birthDateSelected"></span>
@@ -35,6 +42,10 @@
                                 <button class="btn btn-success btn-block"
                                     style="background-color: #F26419; width: 100%;">Registrarse</button>
                             </div>
+
+                            <div id="msg"></div>
+
+
                         </form>
                     </div>
                 </div>

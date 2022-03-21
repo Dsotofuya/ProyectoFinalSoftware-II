@@ -4,7 +4,7 @@ const db = require("../database");
 
 router.get("/", async (req, res) => {
   await db.query(
-    "SELECT ID_VIDEOJUEGO, NOMBRE_VIDEOJUEGO, URL_IMAGEN FROM JUEGOS",
+    "SELECT ID_VIDEOJUEGO, NOMBRE_VIDEOJUEGO, URL_IMAGEN FROM JUEGOS LIMIT 0, 5",
     function (err, gameInfo, fields) {
       if (err) throw err;
       res.render("links/mainPage", { gameInfo });
