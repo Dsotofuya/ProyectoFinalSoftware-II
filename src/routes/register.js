@@ -52,8 +52,8 @@ router.post("/", async (req, res) => {
 
       if (validate(mails, CORREO)) {
         res.render("links/register", { error2 });
-      });
-    }
+      }
+    });
     const newUser = {
       NOMBRE,
       CORREO,
