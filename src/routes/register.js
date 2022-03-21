@@ -19,7 +19,6 @@ router.post("/", async (req, res) => {
       res.render("links/register", { error2 });
     } else {
       if (CONTRASENA != CONFIRMATION) {
-        // render,
         let error = { error: "mostrar" }
         res.render("links/register", { error })
     
