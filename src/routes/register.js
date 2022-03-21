@@ -38,13 +38,22 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
 
   const { NOMBRE, CORREO, PAIS, FECHA_NACIMIENTO, CONTRASENA, CONFIRMATION } = req.body;
-  if(CONTRASENA!=CONFIRMATION){
+
+
+  if (CONTRASENA != CONFIRMATION) {
     // render,
-    let error = {error:"mostrar"}
-    res.render("links/register", {error})
+    let error = { error: "mostrar" }
+    res.render("links/register", { error })
 
-  }else{
+  } else {
 
+    await db.query("SELECT CORREO FROM USUARIOS", function (err, mails, fields) {
+      if (err) throw err;
+
+      if (validate(mails, CORREO)) {
+        res.render("links/register", { error2 });
+      });
+    }
     const newUser = {
       NOMBRE,
       CORREO,
@@ -54,13 +63,16 @@ router.post("/", async (req, res) => {
     };
     console.log(newUser);
     //db.query("SHOW TABLES", function (err, result, fields) {
-      await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
-        
-        if (err) throw err;
-        console.log(result);
-      });
-      res.redirect("/mainPage");
-    }
+    await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
+
+      if (err) throw err;
+      console.log(result);
+    });
+    res.redirect("/mainPage");
+  }
 });
+
+function validate(mails, newMail) { for (const mail of mails) { if (mail.CORREO == newMail) { return true; } } return false; }
+
 
 module.exports = router;

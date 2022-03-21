@@ -19,6 +19,11 @@
                                     pattern="[A-Za-z0-9]*[0-9][A-Za-z0-9]*"
                                     placeholder="Ingresa tu Constraseña (unicamente con alfanumericos)" required>
                                 <br>
+                                {{#each error}}
+                                <div id="error" class="alert alert-danger {{error}}" role="alert">
+                                    Contraseña incorrecta
+                                </div>
+                                {{/each}}
                                 <br>
                                 <button class="btn btn-success btn-block"
                                     style="background-color: #F26419; width: 100%;">iniciar sesion</button>
