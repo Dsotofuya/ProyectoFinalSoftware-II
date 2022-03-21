@@ -16,6 +16,12 @@
                                 <input type="email" class="form-control" name="CORREO" placeholder="Ingresa tu Correo"
                                     required>
                                 <br>
+                                {{#each error2}}
+                                <div id="error" class="alert alert-danger {{error}}" role="alert">
+                                    el Correo ya se encuentra en uso
+                                    <br>
+                                </div>
+                                {{/each}}
                                 <label class="label-xl">Pais</label>
                                 <input type="text" class="form-control" name="PAIS" placeholder="Ingresa tu Pais">
                                 <br>
