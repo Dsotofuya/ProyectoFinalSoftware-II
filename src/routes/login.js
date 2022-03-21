@@ -7,19 +7,23 @@ router.get("/", (req, res) => {
     res.render("links/login");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const { CORREO, CONTRASENA } = req.body;
-    const newUser = {
-        CORREO,
-        CONTRASENA
-    };
-    // console.log(newUser);
-    //    //db.query("SHOW TABLES", function (err, result, fields) {
-    //     await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
-    //     if (err) throw err;
-    //     console.log(result);
-    //    });
-    res.redirect("/mainPage");
+    
+
+       //db.query("SHOW TABLES", function (err, result, fields) {
+        await db.query("SELECT CONTRASENA FROM USUARIOS WHERE CORREO = ?", [CORREO],  function (err, result, fields) {
+            if (err) throw err;
+
+            if (result.CONTRASENA == CONTRASENA){
+                res.redirect("/mainPage");
+            }
+            else{
+                
+            }
+       });
 });
+
+
 
 module.exports = router;

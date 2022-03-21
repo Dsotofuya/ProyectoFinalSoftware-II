@@ -1,4 +1,5 @@
 const express = require("express");
+const { render } = require("express/lib/response");
 const res = require("express/lib/response");
 const router = express.Router();
 const db = require("../database");
@@ -38,7 +39,10 @@ router.post("/", async (req, res) => {
 
   const { NOMBRE, CORREO, PAIS, FECHA_NACIMIENTO, CONTRASENA, CONFIRMATION } = req.body;
   if(CONTRASENA!=CONFIRMATION){
-    res.getElementById("error").classList.add("mostrar");
+    // render,
+    let error = {error:"mostrar"}
+    res.render("links/register", {error})
+
   }else{
 
     const newUser = {

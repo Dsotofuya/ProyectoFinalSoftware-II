@@ -29,9 +29,11 @@
                                     placeholder="Reingresa tu constraseña" required>
                                 <br>
                                 <!-- Mensajes de Verificación -->
-                                <div id="error" class="alert alert-danger ocultar" role="alert">
+                                {{#each error}}
+                                <div id="error" class="alert alert-danger {{error}}" role="alert">
                                     Las Contraseñas no coinciden, vuelve a intentar !
                                 </div>
+                                {{/each}}
                                 <div id="ok" class="alert alert-success ocultar" role="alert">
                                     Las Contraseñas coinciden ! (Procesando formulario ... )
                                 </div>
