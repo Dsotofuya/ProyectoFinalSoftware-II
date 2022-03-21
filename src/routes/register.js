@@ -12,7 +12,11 @@ router.post("/", async (req, res) => {
   const { NOMBRE, CORREO, PAIS, FECHA_NACIMIENTO, CONTRASENA, CONFIRMATION } =
     req.body;
 
+<<<<<<< HEAD
   await db.query("SELECT CORREO FROM USUARIOS", async function (err, mails, fields) {
+=======
+  await db.query ("SELECT CORREO FROM USUARIOS", async function (err, mails, fields) {
+>>>>>>> d09f2c168f40bb31681ae94bd693ac1cc043f880
     if (err) throw err;
     let error2 = { error: "mostrar" };
     if (validate(mails, CORREO)) {
