@@ -1,0 +1,18 @@
+<div class="list-group" style="height: 100%; background-color: #33658A; display: flex;">
+    {{#each gameInfo}}
+    <div class="row" style="height: 100%; width: 100%; background-color: #33658A; margin-top: 1%;">
+        <a class="col-sm-8 text-center" href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white; height: 20%;">
+            <div class="row">
+
+                <p class="col card-text " id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
+                <p class="col card-text " >{{PRECIO_VIDEOJUEGO}}</p>
+                <div class="col" style="height: 100%; ">
+                    <img src="{{URL_IMAGEN}}" alt="steamLogo" width="30%" height="30%">
+                </div>
+            </div>
+        </a>
+    </div>
+    {{else}}
+    <div>No hay resultados de busqueda</div>
+    {{/each}}
+</div>
