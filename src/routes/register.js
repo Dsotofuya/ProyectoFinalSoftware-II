@@ -3,6 +3,7 @@ const { render } = require("express/lib/response");
 const res = require("express/lib/response");
 const router = express.Router();
 const db = require("../database");
+const helpers = require('../lib/helpers');
 
 router.get("/", (req, res) => {
   res.render("links/register");
@@ -30,6 +31,8 @@ router.post("/", async (req, res) => {
           FECHA_NACIMIENTO,
           CONTRASENA
         };
+        newUser.CONTRASENA = await helpers.encryptPassword(CONTRASENA);
+        console.log(newUser.CONTRASENA);
         console.log(newUser);
         await db.query("INSERT INTO USUARIOS set ?", [newUser], function (err, result, fields) {
           if (err) throw err;

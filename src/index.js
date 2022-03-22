@@ -5,9 +5,11 @@ const path = require("path");
 const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
 const { database } = require('./keys')
+const passport = require('passport');
 
 //Inicializaciones
 const server = express();
+require('/lib/passport');
 
 //Settings
 server.set("port", process.env.PORT || 4445);
@@ -47,6 +49,9 @@ server.use(express.urlencoded({ extended: false }));
 //Este midleware sirve para enviar y consumir jsons
 server.use(express.json());
 
+server.use(passport.initialize());
+server.use(passport.session());
+
 //Global Variables
 server.use((req, res, next) => {
   // app.locals.user = req.user;
@@ -54,13 +59,13 @@ server.use((req, res, next) => {
 });
 
 //Routes
-server.use(module.require("./routes"));
+server.use(module.require("./routes/authentication"));
 server.use("/login", module.require("./routes/login"));
 server.use("/register", module.require("./routes/register"));
 server.use("/gameInfo", module.require("./routes/gameInfo"));
 server.use("/wishList", module.require("./routes/wishlist"));
 server.use("/mainPage", module.require("./routes/mainPage"));
-server.use("/login", module.require("./routes/login"));
+// server.use("/login", module.require("./routes/login"));
 server.use("/search", module.require("./routes/search"));
 
 //Public
