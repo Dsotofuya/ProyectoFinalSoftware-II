@@ -1,21 +1,25 @@
 <div class="list-group" style="height: 100%; background-color: #33658A; display: flex;">
     {{#each gameInfo}}
     <div class="row" style="height: 100%; width: 100%; background-color: #33658A; margin-top: 1%;">
-        <a class="col-sm-8" href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white; height: 20%;">
+        <a class="col-sm-8 text-center" href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white; height: 20%;">
             <div class="row">
 
-                <p class="col card-text" id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
+                <p class="col card-text " id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
                 <div class="col" style="height: 100%; ">
                     <img src="{{URL_IMAGEN}}" alt="steamLogo" width="30%" height="30%">
                 </div>
             </div>
         </a>
-        <a href="wishList/notify/{{ID_VIDEOJUEGO}}">
-            <button class="btn col" style="color: white;">Notificar</button>
-        </a>
-        <a href="wishList/delete/{{ID_VIDEOJUEGO}}">
-            <button class="btn col" style="color: white;">Eliminar</button>
-        </a>
+        <div class="col text-center">
+            <a href="wishList/notify/{{ID_VIDEOJUEGO}}" class="btn col" style="color: white;">
+                Notificar
+            </a>
+        </div>
+        <div class="col text-center">
+            <a href="wishList/delete/{{ID_VIDEOJUEGO}}" class="btn col" style="color: white;">
+                Eliminar
+            </a>
+        </div>
     </div>
     {{else}}
     <div>No hay juegos agregados a la lista de deseos aun</div>

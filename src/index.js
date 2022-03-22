@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
+const { append } = require("express/lib/response");
 
 //Inicializaciones
 const server = express();
@@ -38,6 +39,7 @@ server.use(express.json());
 
 //Global Variables
 server.use((req, res, next) => {
+  // app.locals.user = req.user;
   next();
 });
 
