@@ -19,8 +19,8 @@ async function getGame(gameName) {
   } catch (error) {
     console.error(error, "Este juego no existe en esta pagina");
     return {
-      price: 0,
-      lowerPrice: 0
+      price: -1,
+      lowerPrice: -1
     }
   }
 }

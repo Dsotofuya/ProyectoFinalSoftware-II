@@ -19,7 +19,7 @@ async function getGame(gameName) {
         .replace(",", ".")
     );
     if (isNaN(tempPrice)) {
-      gameDetails.price = 0;
+      gameDetails.price = -1;
     } else{
       gameDetails.price = tempPrice
     }

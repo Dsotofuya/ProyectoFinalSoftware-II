@@ -102,29 +102,29 @@ async function insertGameHistoric(gameName) {
   const steamResponse = await wsSTeam.getGameInfo(
     await wsSTeam.getGame(processString(gameName))
   );
-
+  let historicGame = { ID_VIDEOJUEGO: steamResponse.id }
   await db.query(
     "SELECT PRECIO_STEAM, PRECIO_EPIC, PRECIO_ENEBA FROM JUEGOS WHERE ID_VIDEOJUEGO = ?",
     [steamResponse.id],
-    function (err, result, fields) {
+    async function (err, result, fields) {
       if (err) throw err;
-      console.log(result);
+      const minPrice = Math.min(result[0].PRECIO_STEAM, result[0].PRECIO_EPIC, result[0].PRECIO_ENEBA);
+      if (result[0].PRECIO_STEAM == minPrice) {
+        historicGame.TIENDA = "Steam";
+        historicGame.PRECIO = minPrice;
+      } else if (result[0].PRECIO_EPIC == minPrice) {
+        historicGame.TIENDA = "Epic Store";
+        historicGame.PRECIO = minPrice;
+      } else if (result[0].PRECIO_ENEBA == minPrice) {
+        historicGame.TIENDA = "Eneba";
+        historicGame.PRECIO = minPrice;
+      }
+      await db.query("INSERT INTO HISTORIAL_JUEGOS set ?", [historicGame], function (error, resultQuery, field) {
+        if (err) throw err;
+        console.log(resultQuery);
+      })
     }
   );
-
-  //  let gameHistory = {
-  //   ID_VIDEOJUEGO: steamResponse.id,
-  //   TIENDA:,
-  //   PRECIO:,
-  //  }
-  // await db.query(
-  //   "INSERT INTO JUEGOS set ?",
-  //   [game],
-  //   function (err, result, fields) {
-  //     if (err) throw err;
-  //     console.log(result);
-  //   }
-  // );
 }
 
 function splitSpaces(name) {
@@ -151,15 +151,22 @@ function processString(gameName) {
   return arrayWords.join(" ");
 }
 
-async function f1(gameName) {
-  const a = await scrapGame(gameName);
-  console.log(a);
-  await insertGenres(gameName);
-  await insertGame(a);
-  await insertGameGenres(gameName);
-  // await insertGameHistoric(gameName);
+async function updateGame(gameId) {
+
 }
-f1("F1 2021");
+
+async function registerGame(gameName) {
+  console.log("Juego: " + gameName, " solcitado")
+  const game = await scrapGame(gameName);
+  console.log(game);
+  await insertGenres(gameName);
+  await insertGame(game);
+  await insertGameGenres(gameName);
+  await insertGameHistoric(gameName);
+  console.log("Datos del Juego: " + gameName, " insertados")
+}
+
+registerGame("Project Zomboid");
 
 // module.exports.scrapGame = scrapGame;
 // module.exports.insertGame = insertGame;
