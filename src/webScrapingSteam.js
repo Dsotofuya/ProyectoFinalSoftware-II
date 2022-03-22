@@ -1,4 +1,6 @@
 const axios = require("axios").default;
+const cheerio = require("cheerio");
+const { CLIENT_PS_MULTI_RESULTS } = require("mysql/lib/protocol/constants/client");
 
 //Funcion asincrona para obtener los datos de un juego apartir de su nombre en concreto
 async function getGame(gameName) {
@@ -40,5 +42,27 @@ async function getGameInfo(gameId) {
   }
 }
 
+async function getSearchList(gameName) {
+  try {
+    const gameSearch = "https://store.steampowered.com/search/?term=";
+    const response = await axios.get(
+      gameSearch + gameName
+    );
+    const gameList = [];
+    const $ = cheerio.load(response.data)
+
+    gameList[0] = { id: $(".search_result_row").first().attr("data-ds-appid"), tittle: $(".search_result_row").first().find(".title").text(), image: $(".search_result_row").first().find("img").attr("src") };
+     $(".search_result_row").each(function (i, element) {
+       var a = $(this);
+       gameList[i] = { id: a.attr("data-ds-appid"), tittle: a.find(".title").text(), image: a.find("img").attr("src") }
+     })
+    return gameList;
+  } catch (err) {
+    console.error(err);
+  }
+}
+ getSearchList("golf")
+
 module.exports.getGame = getGame;
 module.exports.getGameInfo = getGameInfo;
+module.exports.getSearchList = getSearchList;
