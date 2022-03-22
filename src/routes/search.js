@@ -1,19 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database');
+const wsSTeam = require('../webScrapingSteam');
 
 // router.get("/:gameName", async (req, res) => {
     router.get("/", async (req, res) => {
     let {gameName} = req.query;
-    console.log(gameName);
-    res.send("Hola")
-    // await db.query(
-    //   "UPDATE `LISTAS_DESEOS` SET `NOTIFICACION`= false WHERE `ID_USUARIO` = 1 AND `ID_VIDEOJUEGO` = ?", [idTemp.gameId],
-    //   function (err, fields) {
-    //     if (err) throw err;
-    //     res.redirect("/wishList");
-    //   }
-    // );
+    const list = await wsSTeam.getSearchList(gameName);
+    res.render("links/search", { list: list });
 });
 
 module.exports = router;
