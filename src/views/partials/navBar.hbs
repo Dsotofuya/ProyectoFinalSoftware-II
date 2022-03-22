@@ -11,12 +11,14 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <div id="search" class="input-group" style="width: 100%;">
-                        <input class="inputSearch" placeholder="Buscar" />
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <form action="/search" method="GET">
+                        <div id="search" class="input-group" style="width: 100%;">
+                            <input name="gameName" class="inputSearch" placeholder="Buscar" />
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-sm-2 " id="buttons">

@@ -104,18 +104,18 @@ async function insertGameHistoric(gameName) {
   );
   let historicGame = { ID_VIDEOJUEGO: steamResponse.id }
   await db.query(
-    "SELECT PRECIO_STEAM, PRECIO_EPIC, PRECIO_ENEBA FROM JUEGOS WHERE ID_VIDEOJUEGO = ?",
+    "SELECT NOMBRE_VIDEOJUEGO, PRECIO_STEAM, CASE WHEN PRECIO_EPIC = -1 THEN 99999 ELSE PRECIO_EPIC END PRECIO_EPIC_FORMATED, CASE WHEN PRECIO_ENEBA = -1 THEN 99999 ELSE PRECIO_ENEBA END PRECIO_ENEBA_FORMATED FROM JUEGOS  WHERE ID_VIDEOJUEGO = ?",
     [steamResponse.id],
     async function (err, result, fields) {
       if (err) throw err;
-      const minPrice = Math.min(result[0].PRECIO_STEAM, result[0].PRECIO_EPIC, result[0].PRECIO_ENEBA);
+      const minPrice = Math.min(result[0].PRECIO_STEAM, result[0].PRECIO_EPIC_FORMATED, result[0].PRECIO_ENEBA_FORMATED);
       if (result[0].PRECIO_STEAM == minPrice) {
         historicGame.TIENDA = "Steam";
         historicGame.PRECIO = minPrice;
-      } else if (result[0].PRECIO_EPIC == minPrice) {
+      } else if (result[0].PRECIO_EPIC_FORMATED == minPrice) {
         historicGame.TIENDA = "Epic Store";
         historicGame.PRECIO = minPrice;
-      } else if (result[0].PRECIO_ENEBA == minPrice) {
+      } else if (result[0].PRECIO_ENEBA_FORMATED == minPrice) {
         historicGame.TIENDA = "Eneba";
         historicGame.PRECIO = minPrice;
       }
@@ -166,7 +166,7 @@ async function registerGame(gameName) {
   console.log("Datos del Juego: " + gameName, " insertados")
 }
 
-registerGame("Project Zomboid");
+registerGame("Golf It!");
 
 // module.exports.scrapGame = scrapGame;
 // module.exports.insertGame = insertGame;
