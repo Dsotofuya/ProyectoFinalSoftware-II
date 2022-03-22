@@ -9,7 +9,6 @@ const passport = require('passport');
 
 //Inicializaciones
 const server = express();
-require('/lib/passport');
 
 //Settings
 server.set("port", process.env.PORT || 4445);
