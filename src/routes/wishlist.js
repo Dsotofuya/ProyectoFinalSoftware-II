@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database');
 
+
 router.get("/", async (req, res) => {
   await db.query(
     "SELECT j.ID_VIDEOJUEGO, j.NOMBRE_VIDEOJUEGO, j.URL_IMAGEN, ld.NOTIFICACION FROM JUEGOS j, LISTAS_DESEOS ld WHERE j.ID_VIDEOJUEGO =  ld.ID_VIDEOJUEGO",
