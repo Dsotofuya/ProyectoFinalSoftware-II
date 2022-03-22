@@ -10,8 +10,14 @@
                 </div>
             </div>
         </a>
-        <button class="btn col" style="color: white;">Notificar</button>
-        <button class="btn col" style="color: white;">Eliminar</button>
+        <a href="wishList/notify/{{ID_VIDEOJUEGO}}">
+            <button class="btn col" style="color: white;">Notificar</button>
+        </a>
+        <a href="wishList/delete/{{ID_VIDEOJUEGO}}">
+            <button class="btn col" style="color: white;">Eliminar</button>
+        </a>
     </div>
+    {{else}}
+    <div>No hay juegos agregados a la lista de deseos aun</div>
     {{/each}}
 </div>
