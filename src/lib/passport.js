@@ -1,16 +1,20 @@
 const req = require('express/lib/request');
-const Passport = require('passport');
+const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('../database');
+const helpers = require('../lib/helpers');
 
-Passport.use('local.login', new LocalStrategy({
-  mailField: 'CORREO',
+passport.use('local.login', new LocalStrategy({
+  usernameField: 'CORREO',
   passwordField: 'CONTRASENA',
   passReqToCallback: true
+// }));
 }, async (req, CORREO, CONTRASENA, done) => {
+  console.log("x");
   const rows = await db.query('SELECT * FROM USUARIOS WHERE CORREO = ?', [CORREO]);
-  if (rows.length > 0) {
+  console.log(rows);
+  if (Object.keys(rows).length!==0) {
     const user = rows[0];
     const validPassword = await helpers.matchPassword(CONTRASENA, user.CONTRASENA)
     if (validPassword) {

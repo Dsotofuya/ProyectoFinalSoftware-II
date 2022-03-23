@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const flash = require('connect-flash');
 const { engine } = require("express-handlebars");
 const path = require("path");
 const session = require('express-session');
@@ -9,6 +10,7 @@ const passport = require('passport');
 
 //Inicializaciones
 const server = express();
+require('./lib/passport');
 
 //Settings
 server.set("port", process.env.PORT || 4445);
@@ -47,12 +49,13 @@ server.use(morgan("short"));
 server.use(express.urlencoded({ extended: false }));
 //Este midleware sirve para enviar y consumir jsons
 server.use(express.json());
-
+server.use(flash());
 server.use(passport.initialize());
 server.use(passport.session());
 
 //Global Variables
 server.use((req, res, next) => {
+  server.locals.success = req.flash('success');
   // app.locals.user = req.user;
   next();
 });
