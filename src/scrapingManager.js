@@ -9,13 +9,11 @@ async function scrapGame(gameName) {
   const steamResponse = await wsSTeam.getGameInfo(
     await wsSTeam.getGame(processString(gameName))
   );
-  const epicResponse = await wsEpic.getGame(splitSpaces(gameName));
-  const enebaResponse = await wsEneba.getGame(gameName);
+  const epicResponse = await wsEpic.getGame(processName(splitSpaces(gameName)));
+  const enebaResponse = await wsEneba.getGame(processName(gameName));
   console.log("Webscraping steam: ", steamResponse);
   console.log("Webscraping epic: ", epicResponse);
   console.log("Webscraping eneba: ", enebaResponse);
-
-  // console.log(steamResponse.genres)
   return {
     ID_VIDEOJUEGO: steamResponse.id,
     NOMBRE_VIDEOJUEGO: steamResponse.name,
@@ -26,12 +24,12 @@ async function scrapGame(gameName) {
       "https://store.steampowered.com/app/" +
       steamResponse.id +
       "/" +
-      splitSpacesUnder(gameName) +
+      processName(splitSpacesUnder(gameName)) +
       "/",
     PRECIO_STEAM: steamResponse.final_formatted,
     URL_EPIC:
       "https://www.epicgames.com/store/es-ES/p/" +
-      splitSpaces(gameName).toLowerCase(),
+      processName((splitSpaces(gameName).toLowerCase())),
     PRECIO_EPIC: epicResponse.price,
     URL_ENEBA: enebaResponse.url,
     PRECIO_ENEBA: enebaResponse.price,
@@ -127,6 +125,38 @@ async function insertGameHistoric(gameName) {
   );
 }
 
+async function updateGameHistoric(gameId) {
+  await db.query(
+    "SELECT NOMBRE_VIDEOJUEGO, PRECIO_STEAM, CASE WHEN PRECIO_EPIC = -1 THEN 99999 ELSE PRECIO_EPIC END PRECIO_EPIC_FORMATED, CASE WHEN PRECIO_ENEBA = -1 THEN 99999 ELSE PRECIO_ENEBA END PRECIO_ENEBA_FORMATED FROM JUEGOS  WHERE ID_VIDEOJUEGO = ?",
+    [gameId],
+    async function (err, result, fields) {
+      if (err)
+        throw err;
+      const minPrice = Math.min(result[0].PRECIO_STEAM, result[0].PRECIO_EPIC_FORMATED, result[0].PRECIO_ENEBA_FORMATED);
+      if (result[0].PRECIO_STEAM == minPrice) {
+        historicGame.TIENDA = "Steam";
+        historicGame.PRECIO = minPrice;
+      } else if (result[0].PRECIO_EPIC_FORMATED == minPrice) {
+        historicGame.TIENDA = "Epic Store";
+        historicGame.PRECIO = minPrice;
+      } else if (result[0].PRECIO_ENEBA_FORMATED == minPrice) {
+        historicGame.TIENDA = "Eneba";
+        historicGame.PRECIO = minPrice;
+      }
+      await db.query("INSERT INTO HISTORIAL_JUEGOS set ?", [historicGame], function (error, resultQuery, field) {
+        if (err)
+          throw err;
+        console.log(resultQuery);
+      });
+    }
+  );
+}
+
+
+function processName(name){
+  return name.replace("®", "");
+}
+
 function splitSpaces(name) {
   return name.replace(" ", "-");
 }
@@ -166,9 +196,7 @@ async function registerGame(gameName) {
   console.log("Datos del Juego: " + gameName, " insertados")
 }
 
-registerGame("Golf It!");
-
-// module.exports.scrapGame = scrapGame;
+module.exports.scrapGame = scrapGame;
 // module.exports.insertGame = insertGame;
 
 // barra de busqueda por tecla a la base de datos y si no existe retornar busqueda, generar la tarjeta y dentro de la tarjeta si le da en guardar en la lista de deseados ahí si guarde ese juego en la base de datos
