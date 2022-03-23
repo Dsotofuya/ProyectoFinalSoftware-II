@@ -7,7 +7,7 @@ const db = require("./database");
 //Prueba webscraping
 async function scrapGame(gameName) {
   const steamResponse = await wsSTeam.getGameInfo(
-    await wsSTeam.getGame(processString(gameName))
+    await wsSTeam.getGame(processName(processString(gameName)))
   );
   const epicResponse = await wsEpic.getGame(processName(splitSpaces(gameName)));
   const enebaResponse = await wsEneba.getGame(processName(gameName));
@@ -36,6 +36,38 @@ async function scrapGame(gameName) {
     POPULARIDAD: 5,
   };
 }
+
+
+async function scrapGameById(gameId) {
+  const steamResponse = await wsSTeam.getGameInfo(gameId);
+  const epicResponse = await wsEpic.getGame(processName(splitSpaces(steamResponse.name)));
+  const enebaResponse = await wsEneba.getGame(processName(steamResponse.name));
+  console.log("Webscraping steam: ", steamResponse);
+  console.log("Webscraping epic: ", epicResponse);
+  console.log("Webscraping eneba: ", enebaResponse);
+  return {
+    ID_VIDEOJUEGO: steamResponse.id,
+    NOMBRE_VIDEOJUEGO: steamResponse.name,
+    URL_IMAGEN: steamResponse.header_image,
+    DESCRIPCION: steamResponse.short_description,
+    DESARROLLADORA: steamResponse.developers[0],
+    URL_STEAM:
+      "https://store.steampowered.com/app/" +
+      steamResponse.id +
+      "/" +
+      processName(splitSpacesUnder(steamResponse.name)) +
+      "/",
+    PRECIO_STEAM: steamResponse.final_formatted,
+    URL_EPIC:
+      "https://www.epicgames.com/store/es-ES/p/" +
+      processName((splitSpaces(steamResponse.name).toLowerCase())),
+    PRECIO_EPIC: epicResponse.price,
+    URL_ENEBA: enebaResponse.url,
+    PRECIO_ENEBA: enebaResponse.price,
+    POPULARIDAD: 5,
+  };
+}
+
 
 async function insertGame(game) {
   await db.query(
@@ -125,35 +157,8 @@ async function insertGameHistoric(gameName) {
   );
 }
 
-async function updateGameHistoric(gameId) {
-  await db.query(
-    "SELECT NOMBRE_VIDEOJUEGO, PRECIO_STEAM, CASE WHEN PRECIO_EPIC = -1 THEN 99999 ELSE PRECIO_EPIC END PRECIO_EPIC_FORMATED, CASE WHEN PRECIO_ENEBA = -1 THEN 99999 ELSE PRECIO_ENEBA END PRECIO_ENEBA_FORMATED FROM JUEGOS  WHERE ID_VIDEOJUEGO = ?",
-    [gameId],
-    async function (err, result, fields) {
-      if (err)
-        throw err;
-      const minPrice = Math.min(result[0].PRECIO_STEAM, result[0].PRECIO_EPIC_FORMATED, result[0].PRECIO_ENEBA_FORMATED);
-      if (result[0].PRECIO_STEAM == minPrice) {
-        historicGame.TIENDA = "Steam";
-        historicGame.PRECIO = minPrice;
-      } else if (result[0].PRECIO_EPIC_FORMATED == minPrice) {
-        historicGame.TIENDA = "Epic Store";
-        historicGame.PRECIO = minPrice;
-      } else if (result[0].PRECIO_ENEBA_FORMATED == minPrice) {
-        historicGame.TIENDA = "Eneba";
-        historicGame.PRECIO = minPrice;
-      }
-      await db.query("INSERT INTO HISTORIAL_JUEGOS set ?", [historicGame], function (error, resultQuery, field) {
-        if (err)
-          throw err;
-        console.log(resultQuery);
-      });
-    }
-  );
-}
 
-
-function processName(name){
+function processName(name) {
   return name.replace("®", "");
 }
 
@@ -185,17 +190,19 @@ async function updateGame(gameId) {
 
 }
 
-async function registerGame(gameName) {
-  console.log("Juego: " + gameName, " solcitado")
-  const game = await scrapGame(gameName);
+async function registerGame(gameId) {
+  console.log("Juego: " + gameId, " solcitado")
+  const game = await scrapGameById(gameId);
   console.log(game);
-  await insertGenres(gameName);
+  await insertGenres(game.NOMBRE_VIDEOJUEGO);
   await insertGame(game);
-  await insertGameGenres(gameName);
-  await insertGameHistoric(gameName);
-  console.log("Datos del Juego: " + gameName, " insertados")
+  await insertGameGenres(game.NOMBRE_VIDEOJUEGO);
+  await insertGameHistoric(game.NOMBRE_VIDEOJUEGO);
+  console.log("Datos del Juego: " + game.NOMBRE_VIDEOJUEGO, " insertados")
 }
 
+// updateGameHistoric(5)
+module.exports.registerGame = registerGame
 module.exports.scrapGame = scrapGame;
 // module.exports.insertGame = insertGame;
 
