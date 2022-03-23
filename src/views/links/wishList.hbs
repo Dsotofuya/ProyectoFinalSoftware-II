@@ -1,5 +1,4 @@
 <div class="list-group" style="height: 100%; background-color: #33658A; display: flex;">
-    <h1>esta es tu lista de deseos</h1>
     {{#each gameInfo}}
     <div class="row" style="height: 100%; width: 100%; background-color: #33658A; margin-top: 1%;">
         <a class="col-sm-8 text-center" href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white; height: 20%;">
@@ -12,8 +11,8 @@
             </div>
         </a>
         <div class="col text-center">
-            <a href="wishList/notify/{{ID_VIDEOJUEGO}}" class="btn col" style="color: white;">
-                Notificar
+            <a href="wishList/notify/{{ID_VIDEOJUEGO}}-{{NOTIFICACION}}" class="btn col" style="color: white;">
+                Notificar {{NOTIFICACION}}
             </a>
         </div>
         <div class="col text-center">

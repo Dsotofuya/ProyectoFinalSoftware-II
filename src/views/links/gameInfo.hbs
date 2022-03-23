@@ -12,12 +12,10 @@
                     <p class="text-center fw-light" style="font-size: larger; font-style: italic;">Descripción:
                         {{DESCRIPCION}}</p>
                 </div>
-                <FORM action="/wishList" method="POST">
-
+                <FORM action="/wishList/{{ID_VIDEOJUEGO}}" method="POST">
                 <div class="row justify-content-center" style="margin: 5vh; width: 90%; height: 100%;" >
-                    {{!-- aca va el boton --}}
                     <button class="btn btn-success btn-block"
-                        style="background-color: #F26419; width: 100%; font-size: x-large; height: 90hv;" id="{{ID_VIDEOJUEGO}}">agregar a
+                        style="background-color: #F26419; width: 100%; font-size: x-large; height: 90hv;" >agregar a
                         lista de
                         deseos</button>
                 </div>
