@@ -13,8 +13,7 @@ passport.use('local.login', new LocalStrategy({
   await db.query('SELECT * FROM USUARIOS WHERE CORREO = ?', [CORREO], async function (error, userResult) {
     const user = userResult[0];
     if (Object.keys(userResult).length !== 0) {
-      // const validPassword = await helpers.matchPassword(CONTRASENA, userResult[0].CONTRASENA);
-      const validPassword = true;
+      const validPassword = await helpers.matchPassword(CONTRASENA, userResult[0].CONTRASENA);
       if (validPassword) {
         console.log("sisi");
         done(null, user, req.flash('success', 'Welcome ' + userResult[0].NOMBRE));
