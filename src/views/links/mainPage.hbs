@@ -1,7 +1,5 @@
 <body class="align-self-stretch">
-
-    <h1>Juegos Populares</h1>
-
+    <h2>Juegos Populares</h2>
     <div id="carouselExampleIndicators" class="carousel slide align-self-stretch" data-ride="carousel"
         style="width: 99%;">
         {{!-- <ol class="carousel-indicators">
@@ -23,19 +21,20 @@
         </div>
 
         {{#if user}}
-        <div>Hola soy homelo chino</div>
-        {{#each category}}
-        {{#each gameRecomend}}
-        <div class="col carrousel-item">
-            <div class="card" style="width: 200wv; background-color: #2F4858;">
-                <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white;">
-                    <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
-                    <p class="card-text" id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
-                </a>
+        {{!-- {{#each gameRecomend}} --}}
+        <div class="row carousel-inner">
+            {{#each gamepopular}}
+            <div class="col carrousel-item">
+                <div class="card" style="width: 200wv; background-color: #2F4858;">
+                    <a href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white;">
+                        <img src="{{URL_IMAGEN}}" class="card-img-top" alt="steamLogo">
+                        <p class="card-text" id="{{ID_VIDEOJUEGO}}">{{NOMBRE_VIDEOJUEGO}}</p>
+                    </a>
+                </div>
             </div>
+            {{/each }}
         </div>
-        {{/each }}
-        {{/each }}
+        {{!-- {{/each }} --}}
         {{/if}}
 
         {{!-- <b class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"
