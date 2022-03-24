@@ -1,6 +1,5 @@
 const axios = require("axios").default;
 const cheerio = require("cheerio");
-const { CLIENT_PS_MULTI_RESULTS } = require("mysql/lib/protocol/constants/client");
 
 //Funcion asincrona para obtener los datos de un juego apartir de su nombre en concreto
 async function getGame(gameName) {
@@ -20,7 +19,6 @@ async function getGame(gameName) {
 
 //Funcion asincrona para objetener los datos especificos de un juego apartir de su id, además de retornar un objeto con los valores necesitados
 async function getGameInfo(gameId) {
-  //URL de la segunda api para obtener datos detallados de un juego especifico
   try {
     const gameInfo = "https://store.steampowered.com/api/appdetails?appids=";
     let gameResponse = await axios.get(gameInfo + gameId + "&cc=us");
@@ -32,13 +30,23 @@ async function getGameInfo(gameId) {
       genres: game[gameId].data.genres,
       header_image: game[gameId].data.header_image,
       developers: game[gameId].data.developers,
-      // initial_formatted: parseFloat((game[gameId].data.price_overview.initial_formatted).substring(1, 5)),
+      steam_url: "https://store.steampowered.com/app/" + gameId,
       final_formatted: parseFloat(
         game[gameId].data.price_overview.final_formatted.substring(1, 5)
       ),
     };
   } catch (err) {
-    console.error(err);
+    console.log("Error: el item seleccionado no puede tener precio o generos: ", err);
+    return {
+      id: 99999,
+      name: "Corrupted Game",
+      short_description: "------------------------------",
+      genres: [{id: -1, description: 'No Genre'}],
+      header_image: "src/public/gatoerror.jpg",
+      developers: "game[gameId].data.developers",
+      steam_url: "https://store.steampowered.com/app/",
+      final_formatted: 0
+    };
   }
 }
 
@@ -58,11 +66,9 @@ async function getSearchList(gameName) {
      })
     return gameList;
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
 }
- getSearchList("golf")
 
-module.exports.getGame = getGame;
 module.exports.getGameInfo = getGameInfo;
 module.exports.getSearchList = getSearchList;
