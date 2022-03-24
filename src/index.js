@@ -7,6 +7,7 @@ const session = require('express-session');
 const mysqlStore = require('express-mysql-session');
 const { database } = require('./keys')
 const passport = require('passport');
+const { isLoggedIn } = require('./lib/auth');
 
 //Inicializaciones
 const server = express();
