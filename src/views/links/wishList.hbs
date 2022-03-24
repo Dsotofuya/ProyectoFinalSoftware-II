@@ -1,4 +1,16 @@
 <div class="list-group" style="height: 100%; background-color: #33658A; display: flex;">
+    {{#if message}}
+    <div id="error" class="alert alert-danger" role="alert">
+        {{message}}
+        <br>
+    </div>
+    {{/if}}
+    {{#if success}}
+    <div id="error" class="alert alert-success" role="alert">
+        {{success}}
+        <br>
+    </div>
+    {{/if}}
     {{#each gameInfo}}
     <div class="row" style="height: 100%; width: 100%; background-color: #33658A; margin-top: 1%;">
         <a class="col-sm-8 text-center" href="/gameInfo/{{ID_VIDEOJUEGO}}" style="color: white; height: 20%;">
@@ -25,16 +37,16 @@
     {{else}}
     <div>No hay juegos agregados a la lista de deseos aun</div>
     {{/each}}
+    {{#if message}}
+    <div id="error" class="alert alert-danger" role="alert">
+        {{message}}
+        <br>
+    </div>
+    {{/if}}
+    {{#if success}}
+    <div id="error" class="alert alert-success" role="alert">
+        {{success}}
+        <br>
+    </div>
+    {{/if}}
 </div>
-{{#if message}}
-<div id="error" class="alert alert-danger" role="alert">
-    {{message}}
-    <br>
-</div>
-{{/if}}
-{{#if success}}
-<div id="error" class="alert alert-success" role="alert">
-    {{success}}
-    <br>
-</div>
-{{/if}}
