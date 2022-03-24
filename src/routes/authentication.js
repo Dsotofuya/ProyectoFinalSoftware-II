@@ -18,10 +18,10 @@ router.post('/login', (req, res, next) => {
 });
 
 
-// router.get('/logout', (req, res) => {
-//     req.logOut();
-//     res.redirect('/');
-// });
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/login');
+});
 
 // router.get('/profile', isLoggedIn, (req, res) => {
 //     res.render('profile');
