@@ -21,7 +21,20 @@
             </a>
         </div>
     </div>
+
     {{else}}
     <div>No hay juegos agregados a la lista de deseos aun</div>
     {{/each}}
 </div>
+{{#if message}}
+<div id="error" class="alert alert-danger" role="alert">
+    {{message}}
+    <br>
+</div>
+{{/if}}
+{{#if success}}
+<div id="error" class="alert alert-success" role="alert">
+    {{success}}
+    <br>
+</div>
+{{/if}}

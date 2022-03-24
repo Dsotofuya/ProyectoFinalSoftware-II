@@ -32,9 +32,12 @@ router.get("/notify/:gameId-:notify", async (req, res) => {
   let notify = req.params.notify
   const userid = req.user.ID_USUARIO;
   if (notify == 0) {
-    notify = true
+    req.flash('success', 'se empezará a notificar');
+    notify = true;
   } else if (notify == 1) {
-    notify = false
+    req.flash("message", "se dejará de notificar");
+    console.log("paso")
+    notify = false;
   }
   await db.query(
     "UPDATE `LISTAS_DESEOS` SET `NOTIFICACION`= ? WHERE `ID_USUARIO` = ? AND `ID_VIDEOJUEGO` = ?", [notify, userid, idTemp],
