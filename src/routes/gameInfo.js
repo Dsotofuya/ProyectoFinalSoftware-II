@@ -18,6 +18,9 @@ router.get("/:gameId", async (req, res) => {
       await insertGameGenres(gameId)
       await insertGameHistoric(gameId)
       let gameInfo = await consultGame(gameId)
+      if (req.user != undefined) {
+        await addGenreUser(gameId, req.user.ID_USUARIO)
+      }
       res.render("links/gameInfo", { gameInfo });
     } else {
       await updateGame(gameId)
@@ -26,6 +29,9 @@ router.get("/:gameId", async (req, res) => {
         async function (error, gameInfo) {
           if (error)
             throw error;
+          if (req.user != undefined) {
+            await addGenreUser(gameId, req.user.ID_USUARIO)
+          }
           res.render("links/gameInfo", { gameInfo });
         }
       );
@@ -142,6 +148,23 @@ async function updateGameHistory(gameId) {
         }
       )
     })
+}
+
+async function addGenreUser(gameId, idUser) {
+  let gameRes = await scrapingManager.scrapGameGenresById(gameId)
+  for (const game of gameRes) {
+    await db.query("SELECT * FROM `GENEROS_USUARIOS` WHERE ID_GENERO = ? AND ID_USUARIO = ?", [parseInt(game.id), idUser], async function (err, genreExist, fields) {
+      if (err) throw err;
+      const isEmpty = Object.keys(genreExist).length === 0;
+      if (isEmpty) {
+        await db.query("INSERT INTO `GENEROS_USUARIOS` SET `ID_GENERO`= ?, `ID_USUARIO` = ?, `FRECUENCIA`= FRECUENCIA+1",
+          [parseInt(game.id), idUser])
+      } else {
+        await db.query("UPDATE `GENEROS_USUARIOS` SET `FRECUENCIA`= FRECUENCIA+1 WHERE `ID_GENERO`= ? AND `ID_USUARIO` = ?",
+          [parseInt(game.id), idUser])
+      }
+    })
+  }
 }
 
 module.exports = router;
